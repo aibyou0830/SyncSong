@@ -30,9 +30,12 @@ A modern web app for creating and editing synced lyrics in LRC format.
 
 | Key | Action |
 | --- | ------ |
-| `↑` / `↓` | Adjust timestamp by ±0.1s |
+| `←` / `→` | Adjust timestamp by ±0.1s |
+| `↑` / `↓` | Move to the previous / next line |
 | `Space` | Play / Pause |
-| `Enter` | Next line |
+| `Enter` | Mark the current line at the playback time |
+| `Shift` + `Enter` | Split the line being edited at the cursor |
+| `Delete` | Clear the selected line's timestamp |
 
 ## Development
 
@@ -47,7 +50,7 @@ npm run preview  # Preview production build
 
 - **Vite** - Build tool and dev server with PWA plugin
 - **Tailwind CSS** - Utility-first CSS framework
-- **Vanilla JavaScript** - No framework overhead
+- **Vue 3** - Component-based UI (wizard steps, sync editor)
 - **WaveSurfer.js** - Audio waveform visualization
 - **music-metadata** - Extract metadata from audio files
 

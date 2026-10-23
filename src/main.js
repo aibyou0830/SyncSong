@@ -1,32 +1,16 @@
 /**
- * LRC Editor - Main entry point
+ * SyncSong - Vue entry point
  */
 
-import './style.css';
-import { AudioPlayer } from './audio-player.js';
-import { LyricEditor } from './editor.js';
-import { UI } from './ui.js';
+import './style.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+import { store, editor, player } from './store.js'
 
-// Initialize the application
-function init() {
-  // Create core instances
-  const player = new AudioPlayer();
-  const editor = new LyricEditor();
-  
-  // Initialize UI (connects everything together)
-  const ui = new UI(editor, player);
-  
-  // Expose for debugging in development
-  if (import.meta.env.DEV) {
-    window.__lrcEditor = { player, editor, ui };
-  }
-  
-  console.log('🎵 LRC Editor initialized');
+const app = createApp(App)
+
+if (import.meta.env.DEV) {
+  window.__syncsong = { store, editor, player }
 }
 
-// Wait for DOM to be ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+app.mount('#app')

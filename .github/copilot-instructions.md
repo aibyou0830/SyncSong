@@ -22,7 +22,7 @@ The app is deployed to GitHub Pages at: https://syncsong.net/
 
 - **Vite** - Build tool and dev server with PWA plugin
 - **Tailwind CSS** - Utility-first CSS framework with dark theme
-- **Vanilla JavaScript (ES Modules)** - No framework, keeping it lightweight
+- **Vue 3 (ES Modules)** - Component-based UI, no other framework
 - **WaveSurfer.js** - Audio waveform visualization
 - **music-metadata** - Extract metadata from audio files
 - **Transformers.js** - Client-side AI for optional lyrics transcription (lazy-loaded)
@@ -39,13 +39,15 @@ SyncSong/
 ├── postcss.config.js       # PostCSS configuration
 ├── package.json            # Dependencies
 ├── src/
-│   ├── main.js             # Entry point, initializes app
+│   ├── main.js             # Entry point, mounts the Vue app
+│   ├── App.vue             # Shell: header, step nav, player, footer
+│   ├── store.js            # Shared reactive state + all wizard/sync actions
+│   ├── components/         # StepNav.vue, AudioPlayerPanel.vue, Step1..Step4.vue
 │   ├── style.css           # Tailwind imports + custom component classes
 │   ├── lrc-parser.js       # Parse/serialize LRC format, timestamp utilities
 │   ├── audio-player.js     # AudioPlayer class - playback controls, waveform, events
 │   ├── editor.js           # LyricEditor class - timestamp adjustment, line selection
-│   ├── transcriber.js      # Lazy-loaded Whisper-based speech-to-text (optional)
-│   └── ui.js               # UI class - DOM manipulation, event handlers, drag/drop
+│   └── transcriber.js      # Lazy-loaded Whisper-based speech-to-text (optional)
 ├── public/
 │   ├── favicon.ico         # Site favicon
 │   ├── splitwave.svg       # App logo
@@ -77,8 +79,7 @@ it on their devices.
 - **LyricEditor** (`editor.js`): Manages lyrics data and metadata, handles line selection,
   timestamp adjustments (±0.1s increments), tracks currently playing line index.
 
-- **UI** (`ui.js`): Connects AudioPlayer and LyricEditor to the DOM, handles all event
-  listeners (drag/drop, keyboard, mouse wheel, clicks), renders the 4-step wizard UI.
+- **UI** (`store.js` + `components/`): Reactive state and action functions drive the Vue components, which handle all event listeners (drag/drop, keyboard, clicks) for the 4-step wizard.
 
 ### Data Flow
 

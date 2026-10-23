@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
     outDir: 'dist'
   },
   plugins: [
+    vue(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'splitwave.svg', 'pwa/*.png', 'pwa/*.svg'],
